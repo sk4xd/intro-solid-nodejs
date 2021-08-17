@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Api Documentation",
+    "description": "This is an User api",
+    "version": "1.0.0",
+    "contact": {
+      "email": "teste@teste.com.br"
+    }
+
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "exemple": {
+                    "name": "User name sample",
+                    "email": "teste@teste.com.br"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "E-mail already been taken."
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "List all",
+        "description": "List all users registered",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "headers",
+            "description": "ID of user to return",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "O usuário não é admin."
+          },
+          "404": {
+            "description": "O usuário não encontrado."
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "User to admin",
+        "description": "Turn an user to admin mode",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID of pet to return",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Usuário não encontrado."
+          },
+          "400": {
+            "description": "Id inválido."
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "User profile",
+        "description": "Get an user profile",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID of user to return",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Usuário não encontrado."
+          },
+          "400": {
+            "description": "Id inválido."
+          }
+        }
+      }
+    }
+  }
+}
